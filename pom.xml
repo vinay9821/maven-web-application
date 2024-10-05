@@ -21,7 +21,7 @@
 		<spring.version>5.1.2.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sonar.host.url>http://50.19.33.27:9000/</sonar.host.url>
+		<sonar.host.url>http://10.1.0.41:9000/</sonar.host.url>
 		<sonar.login>squ_eb0b4a51c80347fe7cd55d390f24a26c931a1952</sonar.login> 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>vinay learning Releases Nexus Repository</name>
-	      <url>http://54.172.97.146:8080/vinay-learning/repository/vinay-learning-release/</url>
+	      <url>http://10.1.0.15:8080/vinay-learning/repository/vinay-learning-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>vinay learning Snapshot Nexus Repository </name>
-	      <url>http://54.172.97.146:8080/vinay-learning/repository/vinay-learning-snapshot/</url>
+	      <url>http://10.1.0.15:8080/vinay-learning/repository/vinay-learning-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
