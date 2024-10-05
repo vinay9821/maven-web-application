@@ -96,14 +96,14 @@
 	
 	    <repository>
 	      <id>nexus</id>
-	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://13.212.71.229:9980/mithuntechnologies/repository/canarabank-snapshot/</url>
+	      <name>vinay learning Releases Nexus Repository</name>
+	      <url>http://54.172.97.146:8080/vinay-learning/repository/vinay-learning-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
-	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://13.212.71.229:9980/mithuntechnologies/repository/canarabank-release/</url>
+	      <name>vinay learning Snapshot Nexus Repository </name>
+	      <url>http://54.172.97.146:8080/vinay-learning/repository/vinay-learning-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
