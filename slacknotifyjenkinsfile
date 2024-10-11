@@ -1,0 +1,70 @@
+node{
+
+
+    echo "this is a jon name is ${env.JOB_NAME}"
+    echo "this is an a node name is ${env.NODE_NAME}"
+    echo "this is a build number is ${env.BUILD_NUMBER}"
+    echo "this is for the jenkins home directory ${env.JENKINS_HOME}"
+
+    properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([cron('* * * * *')])])
+
+    def mavenHome = tool name: "maven3.9.8"
+
+    try{
+    stage('checkoutcode-github'){
+        git branch: 'dev', changelog: false, credentialsId: '20d9aa04-3c39-4168-9d03-2f5efd8cd230', poll: false, url: 'https://github.com/vinay9821/maven-web-application.git'
+    }
+    stage('build'){
+        sh "${mavenHome}/bin/mvn clean package"
+      
+    }
+    stage('generate_sonarque_report'){
+        sh "${mavenHome}/bin/mvn sonar:sonar"
+    }
+    stage('upload_artifacts_into_nexus'){
+        sh "${mavenHome}/bin/mvn deploy"
+    }
+    stage('deploy_application_into_tomcat-server'){
+        sshagent(['025f4913-c4ac-4abb-abb7-7a17cf78cc66']) {
+            sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@10.1.0.47:/opt/tomcat/apache-tomcat-9.0.95/webapps" 
+        }
+
+    }
+    }//tryclosing tag
+
+    catch(e){
+        currentBuild.result = "FAILURE"
+
+    }
+    finally{
+
+        notifyBuild(currentBuild.result)
+    }
+}
+//slack send notifications
+
+def notifyBuild(String buildStatus = 'STARTED') {
+  // build status of null means successful
+  buildStatus =  buildStatus ?: 'SUCCESS'
+
+  // Default values
+  def colorName = 'RED'
+  def colorCode = '#FF0000'
+  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def summary = "${subject} (${env.BUILD_URL})"
+
+  // Override default values based on build status
+  if (buildStatus == 'STARTED') {
+    colorName = 'YELLOW'
+    colorCode = '#FFFF00'
+  } else if (buildStatus == 'SUCCESS') {
+    colorName = 'GREEN'
+    colorCode = '#00FF00'
+  } else {
+    colorName = 'RED'
+    colorCode = '#FF0000'
+  }
+
+  // Send notifications
+  slackSend (color: colorCode, message: summary)
+}
