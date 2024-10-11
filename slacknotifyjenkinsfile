@@ -10,6 +10,8 @@ node{
     def mavenHome = tool name: "maven3.9.8"
 
     try{
+    notifyBuild('STARTED')     
+
     stage('checkoutcode-github'){
         git branch: 'dev', changelog: false, credentialsId: '20d9aa04-3c39-4168-9d03-2f5efd8cd230', poll: false, url: 'https://github.com/vinay9821/maven-web-application.git'
     }
