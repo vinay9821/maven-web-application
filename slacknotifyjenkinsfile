@@ -6,7 +6,6 @@ node{
     echo "this is a build number is ${env.BUILD_NUMBER}"
     echo "this is for the jenkins home directory ${env.JENKINS_HOME}"
 
-    properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([cron('* * * * *')])])
 
     def mavenHome = tool name: "maven3.9.8"
 
