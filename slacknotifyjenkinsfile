@@ -1,4 +1,4 @@
-node{
+node('vinay-learning-jenkins-slave'){
 
 
     echo "this is a jon name is ${env.JOB_NAME}"
