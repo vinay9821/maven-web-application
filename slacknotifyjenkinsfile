@@ -16,9 +16,9 @@ node('vinay-learning-jenkins-slave'){
         git branch: 'dev', changelog: false, credentialsId: '20d9aa04-3c39-4168-9d03-2f5efd8cd230', poll: false, url: 'https://github.com/vinay9821/maven-web-application.git'
     }
     stage('build'){
-        sh "${mavenHome}/bin/mvn clean package"
-      
+        sh "${mavenHome}/bin/mvn clean package"  
     }
+/*
     stage('generate_sonarque_report'){
         sh "${mavenHome}/bin/mvn sonar:sonar"
     }
@@ -31,6 +31,7 @@ node('vinay-learning-jenkins-slave'){
         }
 
     }
+*/
     }//tryclosing tag
 
     catch(e){
